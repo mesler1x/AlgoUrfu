@@ -10,6 +10,7 @@ public class Solution {
         twoMissives();
     }
     public static void twoMissives(){
+
         Scanner scanner = new Scanner(System.in);
         int[] size = new int[2];
         String twoSizes = scanner.nextLine();
