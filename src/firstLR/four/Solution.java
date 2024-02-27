@@ -8,9 +8,9 @@ public class Solution {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         String[] splitFirst = scanner.nextLine().split(" ");
-        int maxPower = Integer.parseInt(splitFirst[0]);
-        int m = Integer.parseInt(splitFirst[1]);
-        int mod = Integer.parseInt(splitFirst[2]);
+        int maxPower = Integer.parseInt(splitFirst[0]); // число n
+        int m = Integer.parseInt(splitFirst[1]); // количество аргументов
+        int mod = Integer.parseInt(splitFirst[2]); // на что делим результат от каждого кефа
 
         long[] coefficients = new long[maxPower + 1];
         for (int i = 0; i < maxPower + 1; i++) {
@@ -24,7 +24,6 @@ public class Solution {
         }
 
         for (int i = 0; i < m; i++) {
-            //long x = scanner.nextLong();
             int res = calculate(coefficients, arguments[i], mod, maxPower);
             System.out.println(res);
         }
