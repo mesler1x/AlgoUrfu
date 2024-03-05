@@ -35,6 +35,6 @@ public class Solution {
             result += (long) ((coefficients[i] * Math.pow(x, maxPower)));
             maxPower--;
         }
-        return (int) (result % mod); // вычисление MOD тоесть 4 mod 10 = 4
+        return (int) (result % mod); // вычисление MOD
     }
 }
