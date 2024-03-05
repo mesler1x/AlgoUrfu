@@ -7,12 +7,12 @@ import java.util.Stack;
 
 public class Solution {
     public static void main(String[] args) {
-        int type1Count = 0;
-        int type2Count = 0;
-        int type3Count = 0;
+        int comment1Count = 0;
+        int comment2Count = 0;
+        int comment3Count = 0; // счетчик для скобок
         int literalStringsCount = 0;
         Stack<String> stack = new Stack<>();
-        String types = "";
+        String input = "";
         try (Scanner scanner = new Scanner(System.in)) {
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
@@ -21,91 +21,68 @@ public class Solution {
                 }
                 for (int i = 0; i < line.length(); i++) {
                     if (line.charAt(i) == '(' && i + 1 < line.length() && line.charAt(i + 1) == '*') {
-                        types += "(*";
+                        input += "(*";
                         i++;
                     } else if (line.charAt(i) == '*' && i + 1 < line.length() &&
                             line.charAt(i + 1) == ')') {
-                        types += "*)";
+                        input += "*)";
                         i++;
                     } else if (line.charAt(i) == '{') {
-                        types += "{";
+                        input += "{";
                     } else if (line.charAt(i) == '}') {
-                        types += "}";
+                        input += "}";
                     } else if (line.charAt(i) == '/' && i + 1 < line.length() && line.charAt(i + 1) == '/') {
-                        types += "//";
+                        input += "//";
 
                     } else if (line.charAt(i) == '‘') {
-                        types += "‘";
+                        input += "‘";
                     } else if (i + 1 == line.length()) {
-                        types += " ";
+                        input += " ";
                     }
                 }
             }
         }
 
+        boolean inComment1 = false;
+        boolean inComment2 = false;
+        boolean inComment3 = false;
+        boolean ignoreNextChar = false;
 
-        for (int i = 0; i < types.length(); i++) {
-            if (types.charAt(i) == '(' && i + 1 < types.length() && types.charAt(i + 1) == '*' && !stack.contains("(*")) {
-                if ((!types.substring(0, i).contains("‘") && types.substring(i + 1).contains("‘")) ||
-                        (!types.substring(0, i).contains("{") && types.substring(i + 1).contains("}")) ||
-                        (!types.substring(0, i).contains("//") && i - 1 > 0 && types.charAt(i - 1) != ' ')) {
-                    stack.add("(*");
-                }
-                i++;
-            } else if (types.charAt(i) == '*' && i + 1 < types.length() && types.charAt(i + 1) == ')' && stack.contains("(*")) {
-                stack.pop();
-                type1Count++; // мы не зайдем в это условие если не добавим в стек до этого
-                i++;
-            }
-        }
-        stack.clear();
+        for (int i = 0; i < input.length() - 1; i++) {
+            char currentChar = input.charAt(i);
+            char nextChar = input.charAt(i + 1);
 
-        for (int i = 0; i < types.length(); i++) {
-            if (types.charAt(i) == '{' && !stack.contains("{")) {
-                if ((!types.substring(0, i).contains("‘") && types.substring(i + 1).contains("‘")) ||
-                        (!types.substring(0, i).contains("(*") && i + 1 < types.length() && types.substring(i + 1).contains("*)")) ||
-                        (!types.substring(0, i).contains("//") && i - 1 > 0 && types.charAt(i - 1) != ' ')) {
-                    stack.add("(*");
-                }
-            } else if (types.charAt(i) == '}' && stack.contains("{")) {
-                stack.pop();
-                type2Count++;
+            if (ignoreNextChar) {
+                ignoreNextChar = false;
+                continue;
             }
-        }
-        stack.clear();
 
-        for (int i = 0; i < types.length(); i++) {
-            if (types.charAt(i) == '‘' && !stack.contains("‘")) {
-                if ((!types.substring(0, i).contains("{") && types.substring(i + 1).contains("}")) ||
-                        (!types.substring(0, i).contains("(*") && i + 1 < types.length() && types.substring(i + 1).contains("*)")) ||
-                        (!types.substring(0, i).contains("//") && i - 1 > 0 && types.charAt(i - 1) != ' ')) {
-                    stack.add("‘");
-                }
-            } else if (types.charAt(i) == '‘' && stack.contains("‘")) {
-                stack.pop();
-                literalStringsCount++;
+            if (!inComment1 && currentChar == '(' && nextChar == '*') {
+                inComment1 = true;
+                ignoreNextChar = true;
+            } else if (inComment1 && currentChar == '*' && nextChar == ')' && !ignoreNextChar) {
+                inComment1 = false;
+                ignoreNextChar = true;
+                comment1Count++;
+            }
+
+            if (!inComment2 && currentChar == '{') {
+                inComment2 = true;
+            } else if (inComment2 && currentChar == '}' && !ignoreNextChar) {
+                inComment2 = false;
+                comment2Count++;
+            }
+
+            if (!inComment3 && currentChar == '‘') {
+                inComment3 = true;
+            } else if (inComment3 && nextChar == '‘' && !ignoreNextChar) {
+                inComment3 = false;
+                ignoreNextChar = true;
+                comment3Count++;
             }
         }
-        stack.clear();
-        String[] typesSplit = types.split(" ");
-        // todo тут нужно еще проверить что он стоит в начале строки
-        for (int i = 0; i < types.length(); i++) {
-            if (types.charAt(i) == '/' && i + 1 < types.length() && types.charAt(i + 1) == '/' && !stack.contains("//")) {
-                if ((!types.substring(0, i).contains("‘") && types.substring(i + 1).contains("‘")) ||
-                        (!types.substring(0, i).contains("{") && types.substring(i + 1).contains("}")) ||
-                        (!types.substring(0, i).contains("(*") && i + 1 < types.length() && types.substring(i + 1).contains("*)"))) {
-                    stack.add("//");
-                }
-                i++;
-            } else if (types.charAt(i) == ' ' && stack.contains("//")) {
-                stack.pop();
-                type3Count++;
-                i++;
-            }
-        }
-        stack.clear();
-        System.out.println(types);
-        System.out.println(type1Count + " " + type2Count + " " + type3Count + " " + literalStringsCount);
+        System.out.println(input);
+        System.out.println(comment1Count + " " + comment2Count + " " + comment3Count);
     }
 
 
