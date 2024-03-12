@@ -2,7 +2,7 @@ package firstLR.eight;
 
 import java.util.Scanner;
 
-public class Solution {
+public class Eight {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         String[] nm = scanner.nextLine().split(" ");
@@ -10,11 +10,10 @@ public class Solution {
     }
 
     public static int placeTrees(int n, int m) {
-        switch (m) {
-            case 0:
-                return 1;
-            case 1:
-                return n;
+        if (m == 0) {
+            return 1;
+        } else if (m == 1) {
+            return n;
         }
         if (m > n) {
             return 0;
@@ -22,12 +21,12 @@ public class Solution {
         int variants = 0;
         int interval = 0;
         while (true) {
-            int lengthOfSubTrees = m + interval * (m - 1); // длина расстановки с пробелами равными
             //m - 1 потому что по краям мы не ставим интервал
-            if (lengthOfSubTrees > n) { // если длина с интервалами больше чем длина грядки то выходим
+            int lenOfSubTrees = m + interval * (m - 1); // длина расстановки с пробелами равными (TTT..) - сначала 3 равна
+            if (lenOfSubTrees > n) { // если длина с интервалами больше чем длина грядки то выходим
                 break;
             }
-            variants += (n - lengthOfSubTrees) + 1; // смотрим сколько раз мы можем передвинуть засаженые деревья не выходя за грядку
+            variants += (n - lenOfSubTrees) + 1; // смотрим сколько раз мы можем передвинуть засаженые деревья не выходя за грядку
             interval++;// увеличиваем интервал между деревом
         }
         return variants;

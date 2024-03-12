@@ -1,13 +1,15 @@
 package firstLR.two;
 
+import org.junit.Assert;
+import org.junit.Test;
+
 import java.util.Scanner;
 
-public class Solution {
+public class Two {
     public static void main(String[] args) {
         twoMissives();
     }
     public static void twoMissives(){
-
         Scanner scanner = new Scanner(System.in);
         int[] size = new int[2];
         String twoSizes = scanner.nextLine();
@@ -49,4 +51,6 @@ public class Solution {
 
         return res;
     }
+
+
 }
