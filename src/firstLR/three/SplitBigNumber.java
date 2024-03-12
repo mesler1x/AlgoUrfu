@@ -1,3 +1,5 @@
+package firstLR.three;
+
 public class SplitBigNumber {
 
     MyBigInteger part1;

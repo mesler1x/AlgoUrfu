@@ -1,3 +1,5 @@
+package firstLR.three;
+
 public class MyBigInteger {
     private static final int SIZE = 80000;
 
@@ -94,13 +96,6 @@ public class MyBigInteger {
             var d = MyBigInteger.add(z1, z2);
             return MyBigInteger.add(d, bd);
         }
-    }
-
-    public MyBigInteger rem(long b){
-        long rem = 0;
-        for (int i = numbersSize - 1; i >= 0; i--)
-            rem = (rem * 10 + array[i]) % b;
-        return new MyBigInteger(Long.toString(rem));
     }
 
     private static MyBigInteger addWithoutDifferentSigns(MyBigInteger a, MyBigInteger b){
