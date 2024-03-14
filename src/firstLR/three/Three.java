@@ -1,6 +1,5 @@
 package firstLR.three;
 
-import java.math.BigInteger;
 import java.util.Scanner;
 
 public class Three {
@@ -15,8 +14,6 @@ public class Three {
     public static String permutationNumbers(String firsNum, String secondNum, String operation){
         MyBigInteger number1 = new MyBigInteger(firsNum);
         MyBigInteger number2 = new MyBigInteger(secondNum);
-        BigInteger num1 = new BigInteger(firsNum);
-        BigInteger num2 = new BigInteger(secondNum);
         String result = null;
         if (operation.equals("+")){
             result = MyBigInteger.add(number1, number2).toString();

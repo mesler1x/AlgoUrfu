@@ -70,33 +70,7 @@ public class MyBigInteger {
             return MyBigInteger.subtractWithoutIdenticalSigns(a,b);
     }
 
-    public static MyBigInteger multiplyKaratsuba(MyBigInteger a, MyBigInteger b) {
-        if (a.numbersSize <= MIN_LENGTH_FOR_KARATSUBA && b.numbersSize <= MIN_LENGTH_FOR_KARATSUBA){
-            return multiplySimple(a,b);
-        }
-        else {
-            var m = Math.max(a.numbersSize, b.numbersSize);
-            int m2 = (m / 2) + (m % 2);
 
-            SplitBigNumber aParts = MyBigInteger.splitBigNumber(a,m2);
-            SplitBigNumber bParts = MyBigInteger.splitBigNumber(b,m2);
-
-            MyBigInteger sumOfAParts = MyBigInteger.add(aParts.part1, aParts.part2);
-            MyBigInteger sumOfBParts = MyBigInteger.add(bParts.part1, bParts.part2);
-            MyBigInteger abComacd = multiplyKaratsuba(sumOfAParts,sumOfBParts);
-
-
-            MyBigInteger ac = multiplyKaratsuba(aParts.part1, bParts.part1);
-            MyBigInteger bd = multiplyKaratsuba(aParts.part2, bParts.part2);
-            MyBigInteger sumOfMiddleTerms = subtract(subtract(abComacd, bd), ac);
-
-            MyBigInteger z1 = MyBigInteger.normalize(ac, m2 * 2);
-            MyBigInteger z2 = MyBigInteger.normalize(sumOfMiddleTerms, m2);
-
-            var d = MyBigInteger.add(z1, z2);
-            return MyBigInteger.add(d, bd);
-        }
-    }
 
     private static MyBigInteger addWithoutDifferentSigns(MyBigInteger a, MyBigInteger b){
         boolean isNegativ = false;
@@ -142,58 +116,6 @@ public class MyBigInteger {
             throw new Error();
         int d = getLen(res);
         return new MyBigInteger(res,d, a.isNegative);
-    }
-
-    private static MyBigInteger multiplySimple(MyBigInteger a, MyBigInteger b){
-        if (!(a.array.length == SIZE && b.array.length == SIZE))
-            throw new Error();
-        int[] res = new int[SIZE];
-        if (a.numbersSize == 0 || b.numbersSize == 0)
-            return new MyBigInteger(res,0,false);
-        for (int ia = 0; ia < a.numbersSize; ia++){
-            int carry = 0;
-            for (int ib = 0; ib < b.numbersSize; ib++){
-                carry += res[ia + ib] + a.array[ia] * b.array[ib];
-                res[ia + ib] = carry % 10;
-                carry /= 10;
-            }
-            if (carry > 0){
-                if (!(carry <= 10))
-                    throw new Error();
-                if (!(res[ia + b.numbersSize] == 0))
-                    throw new Error();
-                res[ia + b.numbersSize] = carry;
-            }
-        }
-        int d = getLen(res);
-        return new MyBigInteger(res, d, false);
-    }
-
-    private static MyBigInteger normalize(MyBigInteger a, int zeroCount){
-        for (int i = 0; a.numbersSize > i; i++){
-            a.array[a.numbersSize - 1 - i + zeroCount] = a.array[a.numbersSize - 1 - i];
-            a.array[a.numbersSize - 1 - i] = 0;
-        }
-        return a;
-    }
-
-    private static SplitBigNumber splitBigNumber(MyBigInteger a, int middle){
-        int[] res1 = new int[SIZE];
-        int[] res2 = new int[SIZE];
-        var i = a.numbersSize - 1;
-        while (i >= middle){
-            res1[i - middle] = a.array[i];
-            i--;
-        }
-        while (i >= 0){
-            res2[i] = a.array[i];
-            i--;
-        }
-        var len = getLen(res1);
-        var len2 = getLen(res2);
-        var d = new MyBigInteger(res1, len, false);
-        var c = new MyBigInteger(res2, len2, false);
-        return new SplitBigNumber(d,c);
     }
 
     private static int getLen(int[] a){

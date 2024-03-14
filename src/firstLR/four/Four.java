@@ -25,7 +25,7 @@ public class Four {
         System.out.println(res);
     }
 
-    public static String resultOfPolinomWithArgs(int[] coefficients, int[] arguments, int mod, int polinomPower) {
+    public static String resultOfPolinomWithArgs(int[] coefficients, int[] arguments, int mod, int polinomPower) {// polinom power - n
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < arguments.length; i++) {
             int res = calculateForOneArgument(coefficients, arguments[i], mod, polinomPower);
@@ -40,7 +40,7 @@ public class Four {
         long result = 0;
         for (int i = 0; i < coefficients.length; i++) {
             result += (long) ((coefficients[i] * Math.pow(x, polinomPower)));
-            polinomPower--;
+            polinomPower--;// уменьшение степени полинома
         }
         return (int) (result % mod); // вычисление MOD
     }
