@@ -1,4 +1,4 @@
-package secondLR.fourth;
+package secondLR.four;
 
 import java.io.BufferedReader;
 import java.io.IOException;
