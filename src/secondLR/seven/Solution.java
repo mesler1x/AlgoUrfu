@@ -8,8 +8,7 @@ import java.util.Arrays;
 
 public class Solution {
     public static void main(String[] args) throws IOException {
-        /*BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));*/
-        BufferedReader bufferedReader =new BufferedReader(new FileReader("INPUT.TXT"));
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
         String[] line1 = bufferedReader.readLine().split(" ");
         int n = Integer.parseInt(line1[0]); // число отрезков
         int m = Integer.parseInt(line1[1]); // число точек
@@ -35,11 +34,11 @@ public class Solution {
     private static int[] findDotsBelonging(int[][] segments, int[] dots) {
         int[] findForEachDot = new int[dots.length];
         for (int i = 0; i < findForEachDot.length; i++) {
-            int dot = dots[i];// берем точку
+            int dot = dots[i];// берем точку и проверяем ее для каждого сегмента
             for (int[] segment : segments) {
-                int a = segment[0];
-                int b = segment[1];
-                if (Math.min(a, b) <= dot && Math.max(a, b) >= dot) {
+                int a = segment[0];// первая точка отрезка
+                int b = segment[1];// вторая точка отрезка
+                if (Math.min(a, b) <= dot && Math.max(a, b) >= dot) { // если точка внутри отрезка
                     findForEachDot[i]++;
                 }
             }

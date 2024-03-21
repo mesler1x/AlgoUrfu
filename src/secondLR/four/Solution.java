@@ -21,17 +21,17 @@ public class Solution {
     private static int findSum(int n, int firstNum, int multiplyNum, int mod) {
         int ans = 0;
         int[] arr = new int[n];
-        arr[0] = firstNum;
+        arr[0] = firstNum;// добавляем первое чиcло,от него будем отталкиваться
         Set<Integer> sortedElements = new TreeSet<>();
-        sortedElements.add(firstNum);
+        sortedElements.add(firstNum); // сразу кладём его
         for (int i = 1; i < n; i++) {
             arr[i] = (int) ((arr[i - 1] * multiplyNum) % (Math.pow(2, 32) - 1) % mod);
-            sortedElements.add(arr[i]);
+            sortedElements.add(arr[i]);// добавляем в сет и сразу сортируем
         }
 
         int i = 1;
         for(Integer num : sortedElements){
-            if (i % 2 != 0){
+            if (i % 2 != 0){// если элемент не четный прибавим к сумме
                 ans += num;
             }
             i++;
