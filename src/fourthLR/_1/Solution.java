@@ -7,7 +7,7 @@ import java.io.InputStreamReader;
 
 public class Solution {
     public static void main(String[] args) throws IOException {
-        BufferedReader bufferedReader = new BufferedReader(new FileReader("C:\\Users\\mesle\\Desktop\\DEV\\AlgoUrfu\\src\\fourthLR\\_1\\input.txt"));
+        BufferedReader bufferedReader = new BufferedReader(new FileReader("/home/mesler/Рабочий стол/AlgoUrfu/src/fourthLR/_1/input.txt"));
         String[] firstLine = bufferedReader.readLine().split(" ");
         int n = Integer.parseInt(firstLine[0]);
         int m = Integer.parseInt(firstLine[1]);

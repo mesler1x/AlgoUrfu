@@ -3,6 +3,7 @@ package secondLR.four;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Arrays;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -22,15 +23,14 @@ public class Solution {
         int ans = 0;
         int[] arr = new int[n];
         arr[0] = firstNum;// добавляем первое чиcло,от него будем отталкиваться
-        Set<Integer> sortedElements = new TreeSet<>();
-        sortedElements.add(firstNum); // сразу кладём его
         for (int i = 1; i < n; i++) {
             arr[i] = (int) ((arr[i - 1] * multiplyNum) % (Math.pow(2, 32) - 1) % mod);
-            sortedElements.add(arr[i]);// добавляем в сет и сразу сортируем
         }
 
+        Arrays.sort(arr);
+
         int i = 1;
-        for(Integer num : sortedElements){
+        for(Integer num : arr){
             if (i % 2 != 0){// если элемент не четный прибавим к сумме
                 ans += num;
             }
