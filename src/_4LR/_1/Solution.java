@@ -30,15 +30,15 @@ public class Solution {
     }
 
     private static int found(int[] arr, String operation) {
-        int type = Integer.parseInt(operation.split(" ")[0]);
+        int type = Integer.parseInt(operation.split(" ")[0]);// операция
         int startIndex = Integer.parseInt(operation.split(" ")[1]);
         int endIndex = Integer.parseInt(operation.split(" ")[2]);
         int sum = 0;
         if (type == 2) {
-            arr[startIndex] = endIndex;
+            arr[startIndex] = endIndex; // просто меняем значение потому что endIndex это число в операции 2
         } else {
             for (int i = startIndex; i <= endIndex; i++) {
-                sum += arr[i];
+                sum += arr[i];// считаем сумму промежутка
             }
         }
         return sum;

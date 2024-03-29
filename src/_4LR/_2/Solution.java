@@ -48,6 +48,7 @@ public class Solution {
 
         for (int i = 0; i < prob.size(); i++) {
             int[] arr = prob.get(i);
+            // собираю сет из пробного множества
             Set<Integer> probSet = new HashSet<>();
             for (int j = 0; j < arr.length; j++) {
                 probSet.add(arr[j]);

@@ -26,12 +26,13 @@ public class Solution {
             for (int j = 0; j < word.length(); j++) {
                 currWord.put(word.charAt(j), currWord.getOrDefault(word.charAt(j), 0) + 1);
             }
+            // если такое количество букв есть, то у нас есть группа
             map.put(currWord, map.getOrDefault(currWord, 0) + 1);
         }
 
         int res = 0;
         for(Map.Entry<Map<Character, Integer>, Integer> entry : map.entrySet()) {
-            if (entry.getValue() > 1) {
+            if (entry.getValue() > 1) { // если анаграммы 2 и больше инкрументим группу
                 res++;
             }
         }

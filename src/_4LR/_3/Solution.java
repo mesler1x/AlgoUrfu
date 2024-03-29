@@ -7,6 +7,7 @@ import java.util.*;
 
 public class Solution {
     public static void main(String[] args) throws IOException {
+        // ключ это имя - значение это номер телефонв
         Map<String, String> map = new HashMap<>();
         BufferedReader bufferedReader = new BufferedReader(new FileReader("/home/mesler/Рабочий стол/AlgoUrfu/src/_4LR/_3/input.txt"));
         while (bufferedReader.ready()) {
