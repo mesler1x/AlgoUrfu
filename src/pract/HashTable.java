@@ -19,7 +19,7 @@ public class HashTable {
         this.data = new ListNode[size];
     }
     public int hash(int key) {
-        return (key * hashNumber % size);//делим на размер что бы найти позицию
+        return (key * hashNumber % size);
     }
     public void put(int key, int val) {
         delete(key); // удаляем если есть такой ключ что бы не было ошибок
