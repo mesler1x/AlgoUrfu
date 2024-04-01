@@ -7,7 +7,7 @@ import java.math.BigInteger;
 
 public class Solution {
     public static void main(String[] args) throws IOException {
-        BufferedReader bufferedReader = new BufferedReader(new FileReader("C:\\Users\\mesle\\Desktop\\DEV\\AlgoUrfu\\src\\_5LR\\_4\\input.txt"));
+        BufferedReader bufferedReader = new BufferedReader(new FileReader("/home/mesler/Рабочий стол/AlgoUrfu/src/_5LR/_4/input.txt"));
         int n = Integer.parseInt(bufferedReader.readLine());
         BigInteger[] array = new BigInteger[n];
         for (int i = 0; i < array.length; i++) {
