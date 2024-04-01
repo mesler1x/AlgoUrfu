@@ -18,7 +18,7 @@ public class HashTable {
     public HashTable() {
         this.data = new ListNode[size];
     }
-    public int hash(int key) {
+    public int hash(int key) {//df
         return (key * hashNumber % size);
     }
     public void put(int key, int val) {
