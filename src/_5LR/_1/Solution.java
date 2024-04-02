@@ -9,7 +9,7 @@ import java.util.Map;
 public class Solution {
     // подстроки
     public static void main(String[] args) throws IOException {
-        BufferedReader bufferedReader = new BufferedReader(new FileReader("/home/mesler/Рабочий стол/AlgoUrfu/src/_5LR/_1/input.txt"));
+        BufferedReader bufferedReader = new BufferedReader(new FileReader("C:\\Users\\mesle\\Desktop\\DEV\\AlgoUrfu\\src\\_5LR\\_1\\input.txt"));
         String line = bufferedReader.readLine();
         System.out.println(findMaxWeightOfSubStrings(line));
     }
