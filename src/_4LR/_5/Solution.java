@@ -66,12 +66,10 @@ public class Solution {
                     // если это чисто будет встречаться меньше чем все которые щас в кеше
                     // будем просто обращаться к серверу
                     map.put(num, map.get(num) - 1);
-                    count++;
                 } else {
                     cache.remove(numToRemove);
                     cache.add(num);
                     map.put(num, map.get(num) - 1);
-                    count++;
                 }
             } else {
                 // если число встретиться только 1 раз то просто обратимся к серверу
