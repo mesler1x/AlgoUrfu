@@ -8,6 +8,10 @@ public class Queue {
     private int rear = -1;
     private int countItems = 0;
 
+    public Queue() {
+        this.maxSize = 100_000_000;
+        this.queueArray = new int[maxSize];
+    }
     public Queue(int size) {
         this.maxSize = size;
         this.queueArray = new int[maxSize];

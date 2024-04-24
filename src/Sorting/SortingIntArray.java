@@ -42,7 +42,7 @@ public class SortingIntArray {
             }
             array[j] = temp;
         }
-        // Write your code here.
+
         return array;
     }
 
