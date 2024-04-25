@@ -7,7 +7,7 @@ public class Tree {
 
     public Tree(int n) {
         graph = new HashMap<>();
-        for (int i = 0; i < n; i++) {
+        for (int i = 1; i <= n; i++) {
             graph.put(i, new ArrayList<>());
         }
     }
@@ -26,23 +26,23 @@ public class Tree {
         //инициализируем очередь стартовой точкой
         queue.add(start);
 
-        visited[start] = true;
-        distance[start] = 0;
+        visited[start - 1] = true;
+        distance[start - 1] = 0;
 
         while (!queue.isEmpty()) {
             //брем текущую точку и идём по всем вершинам которые смежны с ней
             int node = queue.remove();
             for (int neighbor : graph.get(node)) {
                 //если мы не посетили соседа
-                if (!visited[neighbor]) {
-                    // если дистанция от соседа до нашей вершины равна искомой дистанции то ВСЁ!
-                    if (distance[node] + 1 == dist) {
+                if (!visited[neighbor - 1]) {
+                    // если дистанция от соседа до нашей вершины равна искомой дистанции, выходим
+                    if (distance[node - 1] + 1 == dist) {
                         return neighbor;
                     }
 
                     //иначе посещяем и считаем дистацию
-                    visited[neighbor] = true;
-                    distance[neighbor] = distance[node] + 1;
+                    visited[neighbor - 1] = true;
+                    distance[neighbor - 1] = distance[node - 1] + 1;
                     //добавляем в очередь тех кто не подошел
                     queue.add(neighbor);
                 }

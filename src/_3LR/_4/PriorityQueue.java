@@ -1,10 +1,12 @@
 package _3LR._4;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.*;
 
 public class PriorityQueue {
     List<Integer> heap;
-    Map<Integer, Integer> map = new TreeMap<>();
 
     public PriorityQueue() {
         heap = new ArrayList<>();
@@ -23,6 +25,7 @@ public class PriorityQueue {
             heap.set(i / 2, temp);
             i = i / 2;
         }
+        System.out.println("added");
     }
 
     public String pop() {
@@ -71,6 +74,32 @@ public class PriorityQueue {
             heap.set(i, heap.get(i / 2));
             heap.set(i / 2, temp);
             i = i / 2;
+        }
+        System.out.println("replaced");
+    }
+
+    public static void main(String[] args) throws IOException {
+        PriorityQueue queue = new PriorityQueue();
+        BufferedReader bufferedReader = new BufferedReader(new FileReader("C:\\Users\\mesle\\Desktop\\DEV\\AlgoUrfu\\src\\_3LR\\_4\\input.txt"));
+
+        List<String> operations = new ArrayList<>();
+        while (bufferedReader.ready()) {
+            String line = bufferedReader.readLine();
+            operations.add(line);
+        }
+
+        for(String operaion : operations) {
+            if (operaion.startsWith("A")) {
+                queue.add(Integer.parseInt(operaion.split(" ")[1]));
+            } else if (operaion.startsWith("D")) {
+                String[] nums = operaion.split(" ");
+                int index = Integer.parseInt(nums[1]);
+                int number = Integer.parseInt(nums[2]);
+                queue.replace(index, number);
+            } else if (operaion.equals("X")) {
+                String popResult = queue.pop();
+                System.out.println(popResult);
+            }
         }
     }
 }

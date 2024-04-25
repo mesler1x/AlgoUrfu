@@ -18,7 +18,7 @@ public class Solution {
         int left = Arrays.stream(chapters).min().getAsInt();
         int right = Arrays.stream(chapters).sum();
         while (left + 1 < right) {
-            int mid = (left + right) / 2;
+            int mid = (left + right) / 2;//предволагаем сколько страниц поместится в том
             int curVolumes = 0;
             int lastVolume = 0;
             for (int i = 0; i < n; i++) {
@@ -28,7 +28,8 @@ public class Solution {
                     curVolumes++;//мы завершаем том и считаем его
                     lastVolume = chapters[i];//все предыдущие мы уже положили идем с того который не смогли положить
                     if (chapters[i] > mid) {//если следующая глава уже больше чем предположительный том нам нет смысла смотреть дальше
-                        curVolumes = nVolumes + 1;
+                        //присваиваем значение нужны что бы потом сдвинуть left
+                        curVolumes = nVolumes;
                         break;
                     }
                 }
@@ -36,9 +37,11 @@ public class Solution {
 
             curVolumes++;//мы во всех случаях не заходим считать последний том но надо его посчитать
             if (curVolumes <= nVolumes) {//если количество томов которое у нас получилось меньше
-                // target кол-во томов нам нужно уменьшить чтобы когда мы клали мы могли поместить в том меньшее кол во глав
+                // target кол-во томов нам нужно уменьшить чтобы когда мы клали мы могли поместить в том меньшее кол во глав но создать больше томов
+                //томов больше страниц меньше
                 right = mid;
-            } else {
+            } else if (curVolumes > nVolumes) {
+                //томов меньше страниц больше
                 left = mid;
             }
         }
