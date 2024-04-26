@@ -33,7 +33,7 @@ public class PriorityQueue {
             return "*";
         }
         if (heap.size() == 2) {
-            return String.valueOf(heap.remove(heap.size() - 1)); // equivalent to heap.remove(1)
+            return String.valueOf(heap.remove(1));
         }
 
         int res = heap.get(1);

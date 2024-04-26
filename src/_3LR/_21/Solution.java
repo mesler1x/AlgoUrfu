@@ -24,10 +24,10 @@ public class Solution {
             for (int i = 0; i < n; i++) {
                 if (lastVolume + chapters[i] <= mid) {//пробуем класть элемент в текущий том
                     lastVolume += chapters[i];
-                } else {//если больше не помещается то есть у нас толщина тома становится больше чем которую мы приняли за максимальную(mid)
+                } else {
                     curVolumes++;//мы завершаем том и считаем его
-                    lastVolume = chapters[i];//все предыдущие мы уже положили идем с того который не смогли положить
-                    if (chapters[i] > mid) {//если следующая глава уже больше чем предположительный том нам нет смысла смотреть дальше
+                    lastVolume = chapters[i];
+                    if (chapters[i] > mid) {
                         //присваиваем значение нужны что бы потом сдвинуть left
                         curVolumes = nVolumes;
                         break;
@@ -35,9 +35,8 @@ public class Solution {
                 }
             }
 
-            curVolumes++;//мы во всех случаях не заходим считать последний том но надо его посчитать
-            if (curVolumes <= nVolumes) {//если количество томов которое у нас получилось меньше
-                // target кол-во томов нам нужно уменьшить чтобы когда мы клали мы могли поместить в том меньшее кол во глав но создать больше томов
+            curVolumes++;
+            if (curVolumes <= nVolumes) {
                 //томов больше страниц меньше
                 right = mid;
             } else if (curVolumes > nVolumes) {
